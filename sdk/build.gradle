@@ -22,9 +22,11 @@ android {
         ndk {
             abiFilters 'armeabi-v7a', 'arm64-v8a'
         }
-        externalNativeBuild.cmake {
-            arguments "-DANDROID_STL=c++_static"
-        }
+		externalNativeBuild.cmake {
+			arguments "-DANDROID_STL=c++_static"
+			arguments "-DCARDBOARDSDK_RENDERING_VULKAN=OFF"
+			arguments "-DCARDBOARDSDK_UNITY_PLUGIN=OFF"
+		}
         defaultConfig {
             consumerProguardFiles 'proguard-rules.pro'
         }
@@ -56,7 +58,7 @@ android {
         }
         // Adds proto file and generated source files
         main.java.srcDirs += "${protobuf.generatedFilesBaseDir}/main/javalite"
-        main.proto.srcDirs = ["${project.rootDir}/proto"]
+        main.proto.srcDirs = ["${projectDir}/../proto"]
         main.proto.includes = ["cardboard_device.proto"]
     }
     namespace = 'com.google.cardboard.sdk'
